@@ -19,3 +19,13 @@ Note: *if it shows green and 'active (running)' then you're on track*
 
 ## Step 4
 ### Confirm you can reach the apache server
+ - Type the code below in the terminal to reveal your public ip address
+
+ `http://169.254.169.254/latest/meta-data/public-ipv4`
+
+ - Open any browser of your choice and type in the address bar the <public_ip_address:80>   e.g. `52.15.25.112:80` and hit enter.
+
+You should see the Apache page as shown in the image below
+![image4](./images/apache_page.png)
+
+*If you see the following page, then your webserver is now correctly installed and accessible through your firewall.*
