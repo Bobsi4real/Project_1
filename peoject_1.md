@@ -176,6 +176,7 @@ phpinfo();`
 When you are finished, save and close the file, refresh the page and you will see a page
 similar to this:
 
+![image11](./images/php.png)
 
 This page provides information about your server from the perspective of PHP. It is useful for debugging and to ensure that your settings are being applied correctly.
 If you can see this page in your browser, then your PHP installation is working as expected.
