@@ -138,11 +138,9 @@ Finally, reload Apache so these changes take effect:
 
 Your new website is now active, but the web root `/var/www/projectlamp` is still empty.
 Create an index.html file in that location so that we can test that the virtual host works as expected:
-
-`sudo echo 'Hello LAMP from hostname' $(curl -s http://169.254.169.254/latest/meta￾data/public-hostname)'` 
- with public IP 
- 
- `'$(curl -s http://169.254.169.254/latest/meta￾data/public-ipv4)> /var/www/projectlamp/index.html`
+```
+sudo echo 'Hello LAMP from hostname' $(curl -s http://169.254.169.254/latest/meta￾data/public-hostname)'with public IP '$(curl -s http://169.254.169.254/latest/meta￾data/public-ipv4)> /var/www/projectlamp/index.html
+```
 
 Now go to your browser and try to open your website 
 URL using IPaddress:
