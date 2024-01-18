@@ -180,13 +180,15 @@ Finally, we will create a PHP script to test that PHP is correctly installed and
 Now that you have a custom location to host your website’s files and folders, we’ll create a PHPtest script to confirm that Apache is able to handle and process requests for PHP files.
 Create a new file named index.php inside your custom webroot folder:
 
-`vim/var/www/projectlamp/index.php`
+`nano /var/www/projectlamp/index.php`
 
 This will open a blank file. Add the 
  following text, which is a valid PHP code, inside the file:
 
-`<?php
-phpinfo();`
+```
+<?php
+phpinfo();
+```
 
 When you are finished, save and close the file, refresh the page and you will see a page
 similar to this:
