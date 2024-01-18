@@ -52,9 +52,9 @@ This script will remove some insecure default settings and lock down access to y
 database system. Before running the script, you will set a password for the root user using mysql_native_password as default authentication method. We’re defining this
 user’s password as PassWord.1
 ### Run the code below to set the password 
-
-`ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password by 'PassWord.1';`
-
+```
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password by 'PassWord.1';
+```
 ### Next exit MySQL by typing `exit` ans hit enter to exit MySQL console
 
 ### Next is securing the securing MySQL installation by running the interactive script below
@@ -99,13 +99,21 @@ Create the directory for projectlamp using the `mkdir` command as follows:
 `sudo mkdir /var/www/projectlamp`
 Next, assign ownership of the directory with your current system user:
 `sudo chown -R $USER:$USER /var/www/projectlamp`
-Then, create and open a new configuration file in Apache’s `sites-available` directory using your preferred command-line editor. Here, we’ll be using `vi` or `vim` (They are the same by the way):
+Then, create and open a new configuration file in Apache’s `sites-available` directory using your preferred command-line editor. Here, we’ll be using `vim` or `nano` (They are all command line editors):
 
-`sudo vi /etc/apache2/sites-available/projectlamp.conf`
+`sudo nano /etc/apache2/sites-available/projectlamp.conf`
 
 This will create a new blankfile. Paste in the following bare-bones configuration by pressing i on the keyboard to enter the insert mode, and paste the text:
-![image10](./images/Project_lamp_config.png)
-
+```
+<VirtualHost *:80>
+   ServerName projectlamp
+   ServerAlias www.projectlamp 
+   ServerAdmin webmaster@localhost
+   DocumentRoot /var/www/projectlamp
+   ErrorLog ${APACHE_LOG_DIR}/error.log
+   CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+```
 To save and close the file, simply follow the steps below:
 1. Hit the esc button on the keyboard
 2. press the ':' key on the keyboad
@@ -118,7 +126,7 @@ You can use the ls command to show the new file in the `sites-available` directo
 
 You will see something like this:
 
-`000-default.conf default-ssl.conf projectlamp.conf`
+000-default.conf default-ssl.conf projectlamp.conf
 
 With this VirtualHost configuration, we’re telling Apache to serve projectlamp using `/var/www/projectlamp` as its web root directory.
 You can now use `a2ensite` command to enable the new virtual host:
@@ -155,8 +163,15 @@ You can leave this file in place as a temporary landing page for your applicatio
 With the default DirectoryIndex settings on Apache, a filenamed index.html will always take precedence over an index.php file. This is useful for setting up maintenance pages in PHP applications, by creating a temporary index.html file containing an informative message to visitors. Because this page will take precedence over the index.php page, it will then become the landing page for the application. Once maintenance is over, the index.html is rename dorremoved from the document root, bringing back the regular application page. In case you want to change this behavior, you’ll need to edit the `/etc/apache2/mods￾enabled/dir.conf` file and change the order in which the index.php file is listed within
 the 'DirectoryIndex' directive:
 
-![image11](./images/Sudo_vim.png)
-
+`sudo nano /etc/apache2/mods-enabled/dir.conf`
+```
+<IfModule mod_dir.c>
+        #Change this:
+        #DirectoryIndex index.html index.cgi index.pl index.php index.xhtml index.htm
+        #To this:
+        DirectoryIndex index.php index.html index.cgi index.pl index.xhtml index.htm
+</IfModule>
+```
 After saving and closing the file, you will need to reload Apache so the changes will take effect:
 
 `sudo systemctl reload apache2`
